@@ -1,0 +1,37 @@
+
+.heading {
+		color:#DA3442
+	}
+.theading{
+		color: #058865
+	}	
+#enteredSymbol{
+	color:#000000;
+}
+#loading{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: 150px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+    font-size:20px;
+}
+.axis path,
+.axis line,
+.axis tick {
+		fill: none;
+		stroke: #ffffff;
+		shape-rendering: crispEdges;
+	}
+.axis text {
+		font-family: sans-serif;
+		fill: #ffffff;
+		font-size: 13px;
+	}
+.value {
+		font-family: sans-serif;
+		font-size: 14px;
+		fill: #ffffff;
+}	

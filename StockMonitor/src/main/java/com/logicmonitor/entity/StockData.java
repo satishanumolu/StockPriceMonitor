@@ -14,18 +14,14 @@ public class StockData {
 	@Id
 	private String symbol;
 	
-	private String name;
-	
-	private BigDecimal price;
-	
+	private String name;	
+	private BigDecimal price;	
 	private BigDecimal changeValue;
 	private BigDecimal changePercent;
-	private long volume;
-	
+	private long volume;	
 	private BigDecimal prevClose;
 	private BigDecimal open;
-	private BigDecimal dayHigh;
-	
+	private BigDecimal dayHigh;	
 	private BigDecimal dayLow;
 
 	public String getSymbol() {

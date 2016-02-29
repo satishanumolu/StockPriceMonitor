@@ -24,7 +24,7 @@
     </plugins>
   </build>
   <dependencies>
-  		<!-- Swagger -->
+  		<!-- Swagger for the API Documentation-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -88,17 +88,23 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.38</version>
 		</dependency>
+		
+		<!-- Yahoo Finance API -->
 		<dependency>
 			<groupId>com.yahoofinance-api</groupId>
 			<artifactId>YahooFinanceAPI</artifactId>
 			<version>2.1.0</version>
 		</dependency>
+		
+		<!-- Junit for Testing-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Mockito for Testing -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>

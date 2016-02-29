@@ -2,7 +2,7 @@ var stockMonitor = {};
 var delSymbol;
 $(document).ready(function () {
     stockMonitor.getTemplate = function (field) {
-        var row = '<tr>' + '<td class="ticker">' + field.symbol + '</td>' + '<td>' + field.name + '</td>' + '<td>' + field.price + '</td>' + '<td>' + field.changeValue + '</td>' + '<td>' + field.changePercent + '</td>' +
+        var row = '<tr>' + '<td class="symbol">' + field.symbol + '</td>' + '<td>' + field.name + '</td>' + '<td>' + field.price + '</td>' + '<td>' + field.changeValue + '</td>' + '<td>' + field.changePercent + '</td>' +
             '<td>' + field.volume + '</td>' + '<td>' + field.prevClose + '</td>' + '<td>' + field.open + '</td>' + '<td>' + field.dayHigh + '</td>' + '<td>' + field.dayLow + '</td>' + '<td>' + '<button type="button" class="btn btn-danger delete">DELETE' + '</td>' + '<td>' + '<button type="button" class="btn btn-info history">HISTORY' + '</td>' + '</tr>';
         return row;
     }
@@ -35,31 +35,25 @@ $(document).ready(function () {
 function initializeEvents(){
     $("table").on("click", ".delete", function (e) {
         e.preventDefault();
-        stockMonitor.delSymbol=$(this).closest('tr').find('.ticker').text();
+        stockMonitor.delSymbol=$(this).closest('tr').find('.symbol').text();
         $.ajax({
             type: "DELETE",
             url: '/StockMonitor/api/stocks/'+stockMonitor.delSymbol,
             dataType: 'json',
-            success: function (data) {
-                $(this).closest('tr').remove();
-                alert("Satish");
+            success: function () {
                 location.reload();
             },
             done: function () {
-                $(this).closest('tr').remove();
                 location.reload();
             },
             error: function (jqXHR,textStatus,erroThrown) {
-                $(this).closest('tr').remove();
-                alert("Satish");
-                //alert(jqXHR.status);
-                location.reload();
+            	location.reload();
             }
         });
     });
     $("table").on("click", ".history", function (e) {
         e.preventDefault();
-        stockMonitor.historySymbol = $(this).closest('tr').find('.ticker').text();
+        stockMonitor.historySymbol = $(this).closest('tr').find('.symbol').text();
         $.ajax({
             type: "GET",
             url: '/StockMonitor/api/stocks/' + stockMonitor.historySymbol,
@@ -96,7 +90,7 @@ function initializeEvents(){
             	
             	if(jqXHR.status == 404)
             	{
-            		alert("There is no stock associated with this request");
+            		alert("There is no stock associated with this Symbol");
             	}
             	else if(jqXHR.status == 400)
             	{
@@ -180,7 +174,8 @@ function InitChart(historyData) {
         
      // now add titles to the axes
         vis.append("text")
-            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        	.attr("class","value")
+        	.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
             .attr("transform", "translate("+ (PADDING/2) +","+(HEIGHT/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
             .text("Open Value");
         

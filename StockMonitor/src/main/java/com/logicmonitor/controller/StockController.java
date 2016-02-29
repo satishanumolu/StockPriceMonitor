@@ -76,7 +76,7 @@ public class StockController {
 		@ApiResponse(code=400, message="Bad Request"),
 		@ApiResponse(code=500, message="Internal Server Error")
 	})
-	public List<QuoteHistory> getHistory(@PathVariable("symbol") String symbol) throws StockNotFoundException{
+	public List<QuoteHistory> getHistory(@PathVariable("symbol") String symbol) throws StockNotFoundException {
 		return service.getHistory(symbol);
 	}
 }

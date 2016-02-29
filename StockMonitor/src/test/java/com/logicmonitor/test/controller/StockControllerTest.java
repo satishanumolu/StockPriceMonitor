@@ -26,7 +26,7 @@ import com.logicmonitor.test.TestConfig;
 @ContextConfiguration(classes={TestConfig.class})
 public class StockControllerTest {
 
-	//mock the dependencies of the controller
+		//mock the dependencies of the controller
 		@Mock
 		private StockService service;
 
