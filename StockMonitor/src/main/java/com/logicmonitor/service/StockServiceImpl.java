@@ -125,7 +125,7 @@ public class StockServiceImpl implements StockService{
 			
 			//Yahoo Finance API is returning results even when their is no stock associated
 			//with the symbol with dummy values,so checking it and throwing error
-			if(s.getName().equalsIgnoreCase("N/A"))
+			if(s==null || s.getName().equalsIgnoreCase("N/A"))
 			{
 				throw new StockNotFoundException();
 			}
