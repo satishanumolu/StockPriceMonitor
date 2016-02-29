@@ -1,6 +1,7 @@
 package com.logicmonitor.util;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +19,7 @@ public class DBUtils {
 		}
 	}
 	
-	public static Properties loadPropertiesFile() throws Exception {
+	public static Properties loadPropertiesFile() throws IOException {
 		 
 		 Properties prop = new Properties();
 		 InputStream in = new FileInputStream("src/main/resources/mysql.properties");
@@ -33,16 +34,17 @@ public class DBUtils {
 		try {
 			
 			Properties prop = loadPropertiesFile();			 
-			String url = prop.getProperty("url");
-			String username = prop.getProperty("username");
-			String password = prop.getProperty("password");
+			String url = prop.getProperty("DB.url");
+			String username = prop.getProperty("DB.username");
+			String password = prop.getProperty("DB.password");
 			con = DriverManager.getConnection(url, username, password);
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("Error in getting JDBC Connection");
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			System.err.println("Error in accessing the properties file");
 		}
 		
 		return con;

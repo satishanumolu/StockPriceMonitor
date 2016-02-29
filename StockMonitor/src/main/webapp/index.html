@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Stock Monitor</title>
+    <meta charset="UTF-8">
+    <title>Stock Monitor</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <style type="text/css">
+			
+			.axis path,
+			.axis line {
+				fill: none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			
+			.axis text {
+				font-family: sans-serif;
+				font-size: 11px;
+			}
+
+		</style>	
 </head>
-<body>
-<h1>Welcome to stock monitor</h1>
+<body class="container">
+<div>
+    <h3>Stock Price Monitor</h3>
+</div>
+<br/>
+<div>
+    <span>Enter Stock Symbol:</span>
+    <span><input type="text" id="enteredSymbol"></span>
+    <span><button class="btn btn-primary add">Add Stock</button></span>
+</div>
+<br/>
+<table class="table table-bordered">
+    <thead>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Change Value</th>
+        <th>Change Percent</th>
+        <th>Volume</th>
+        <th>Previous Close</th>
+        <th>Open</th>
+        <th>Day High</th>
+        <th>Day Low</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<div id="loading"></div>
+<svg id="visualisation" width="1000" height="600"></svg>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="app.js"></script>
 </body>
 </html>

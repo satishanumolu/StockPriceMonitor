@@ -12,6 +12,8 @@ public interface StockDao {
 	
 	public void addStock(StockData stock);
 	
+	public void updateStock(StockData stock);
+	
 	public void deleteStock(String symbol);
 
 }

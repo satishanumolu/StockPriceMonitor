@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.logicmonitor.entity.StockData;
 
 @Repository
+@Transactional
 public class StockDaoImpl implements StockDao{
 
 	@PersistenceContext
@@ -31,13 +32,16 @@ public class StockDaoImpl implements StockDao{
 	}
 
 	@Override
-	@Transactional
 	public void addStock(StockData stock) {
 		em.persist(stock);
 	}
+	
+	@Override
+	public void updateStock(StockData stock) {
+		em.merge(stock);
+	}
 
 	@Override
-	@Transactional
 	public void deleteStock(String symbol) {
 		Query query = em.createQuery(
 			      "DELETE FROM StockData s WHERE s.symbol = :pSymbol");

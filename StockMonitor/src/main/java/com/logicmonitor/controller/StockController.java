@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import yahoofinance.histquotes.HistoricalQuote;
-
+import com.logicmonitor.entity.QuoteHistory;
 import com.logicmonitor.entity.StockData;
 import com.logicmonitor.exception.StockAlreadyExistsException;
 import com.logicmonitor.exception.StockNotFoundException;
@@ -49,9 +48,10 @@ public class StockController {
 	@ApiResponses(value={
 		@ApiResponse(code=200, message="Success"),
 		@ApiResponse(code=400, message="Bad Request"),
+		@ApiResponse(code=404, message="Not Found"),
 		@ApiResponse(code=500, message="Internal Server Error")
 	})
-	public void create (@RequestBody String symbol) throws StockAlreadyExistsException {
+	public void createStock (@RequestBody String symbol) throws StockAlreadyExistsException,StockNotFoundException {
 		service.addStock(symbol);
 	}
 	
@@ -63,7 +63,7 @@ public class StockController {
 		@ApiResponse(code=404, message="Not Found"),
 		@ApiResponse(code=500, message="Internal Server Error")
 	})
-	public void delete (@PathVariable("symbol") String symbol) throws StockNotFoundException {
+	public void deleteStock (@PathVariable("symbol") String symbol) throws StockNotFoundException {
 		service.deleteStock(symbol);
 	}
 	
@@ -76,7 +76,7 @@ public class StockController {
 		@ApiResponse(code=400, message="Bad Request"),
 		@ApiResponse(code=500, message="Internal Server Error")
 	})
-	public List<HistoricalQuote> getHistory(@PathVariable("symbol") String symbol){
+	public List<QuoteHistory> getHistory(@PathVariable("symbol") String symbol) throws StockNotFoundException{
 		return service.getHistory(symbol);
 	}
 }

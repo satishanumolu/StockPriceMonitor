@@ -1,7 +1,9 @@
-package com.logicmonitor.dao;
+package com.logicmonitor;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import yahoofinance.Stock;
@@ -10,7 +12,7 @@ import yahoofinance.YahooFinance;
 import com.logicmonitor.util.DBUtils;
 
 /**
- * Hello world!
+ * Java Program to create and insert stock details in to MySQL database
  *
  */
 public class StockQuoteDump 
@@ -20,7 +22,8 @@ public class StockQuoteDump
         Connection con = DBUtils.connect();
 		Statement stmt = null;
 		String sql = null;
-		String[] stockArr = new String[]{"AMZN","BAC","HPQ","IBN","C","FB","AAPL","GRPN","MSFT","EBAY"};
+		String[] stockArr = new String[]{"AMZN","BAC","HPQ","IBN","C","FB","AAPL","GRPN","MSFT","EBAY"};//Few initial stock details
+		Stock stock;
 		
 		try {
 			
@@ -43,7 +46,7 @@ public class StockQuoteDump
 		      
 		     for(int i=0;i<stockArr.length;i++)
 		     {
-		    	  Stock stock = YahooFinance.get(stockArr[i]);
+		    	  stock = YahooFinance.get(stockArr[i]);
 		    	  
 		    	  String symbol = stock.getSymbol();
 		          String name = stock.getName();
@@ -62,9 +65,24 @@ public class StockQuoteDump
 		     }
 	      
 		}
-		catch(Exception e)
+		catch(SQLException e)
 		{
 			e.printStackTrace();
+			System.err.println("Error in executing SQL Queries");
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+			System.err.println("Error in accessing Yahoo Finance API");
+		}
+		finally 
+		{
+		try {
+				if(con!=null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
     	
     }
